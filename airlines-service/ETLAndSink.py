@@ -24,7 +24,7 @@ class DealWithData(object):
     def resolveJson(self,path):
         data = json.load(open(path,'rb'))
         print(data)
-    def parseTeacherJson(self,path):
+    def parseTeacherJson2(self,path):
         file = open(path, 'r', encoding='utf-8')
         teachers = []
         teachersjsonList=[]
@@ -32,10 +32,10 @@ class DealWithData(object):
             teacherinfo = json.loads(line[0:len(line)-2])
             newTeacher=TeacherInfo()
             newTeacher.__dict__=teacherinfo
-            teachersjsonList.append(teacherinfo)
+            # teachersjsonList.append(teacherinfo)
             teachers.append(newTeacher)
         print(len(teachers))
-        return teachers,teachersjsonList
+        return teachers
     def parseTeacherJson(self,path):
         file = open(path, 'r', encoding='utf-8')
         teachersjsonList=[]
@@ -44,7 +44,7 @@ class DealWithData(object):
             teachersjsonList.append(teacherinfo)
         return teachersjsonList
     def insert2Mysql(self,path):
-        teachers = self.parseTeacherJson(path)
+        teachers = self.parseTeacherJson2(path)
         query = 'insert into teachers_for_test(name, title, info) values(%s, %s, %s)'
         conn  = DBConn("localhost","root","root","airlines","")
         print("dbname",conn.dbName,"user",conn.userName,"passwd",conn.passWd,"ip",conn.ipAddress)
