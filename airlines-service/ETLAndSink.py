@@ -27,12 +27,10 @@ class DealWithData(object):
     def parseTeacherJson2(self,path):
         file = open(path, 'r', encoding='utf-8')
         teachers = []
-        teachersjsonList=[]
         for line in file.readlines():
             teacherinfo = json.loads(line[0:len(line)-2])
             newTeacher=TeacherInfo()
             newTeacher.__dict__=teacherinfo
-            # teachersjsonList.append(teacherinfo)
             teachers.append(newTeacher)
         print(len(teachers))
         return teachers
